@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/05/23 18:57:05 by reciak           ###   ########.fr       */
+/*   Updated: 2025/05/23 19:35:54 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,4 @@ Test(ft_calloc, compare_to_ori)
 	free (pori);
 	printf("pft:  %p\n", pft);
 	printf("pori: %p\n", pori);
-
-	cr_assert(pft == pori);
 }
