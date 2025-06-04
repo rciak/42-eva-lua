@@ -6,7 +6,7 @@
 #    By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 21:15:03 by reciak            #+#    #+#              #
-#    Updated: 2025/06/04 18:17:34 by reciak           ###   ########.fr        #
+#    Updated: 2025/06/04 19:48:32 by reciak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,17 @@ UNIT_TESTS_FILE := ft_printf-tests.c
 OUT := $(basename $(UNIT_TESTS_FILE))
 
 CC := cc
-CFLAGS = -Wall -Wextra -Werror -Wno-format-security -I$(INC_DIR1) -I$(INC_DIR2)
+CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR1) -I$(INC_DIR2)
+ifdef DEV
+  CFLAGS += -Wno-format-security
+else
+  $(info *********************************************************************)
+  $(info *                  !! IMPORTANT NOTE !!                             *)
+  $(info *                                                                   *)
+  $(info * In case of compiler error try running with the flag  DEV  set     *)
+  $(info * make DEV=1                                                        *)
+  $(info *********************************************************************)
+endif
 LFLAGS = -lcriterion $(LIBFT_AR)
 RM    := rm -f
 
