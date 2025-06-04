@@ -6,7 +6,7 @@
 #    By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 21:15:03 by reciak            #+#    #+#              #
-#    Updated: 2025/06/04 09:54:36 by reciak           ###   ########.fr        #
+#    Updated: 2025/06/04 12:01:37 by reciak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,11 @@ src/ft_printf.c
 SRCS := $(addprefix $(BASE_DIR),$(SRCS))
 SRCS := $(SRCS) $(UNIT_TESTS_FILE)
 
+.PHONY: unit-tests
+unit-tests: dummy_test
+
 .PHONY: dummy_test
-dummy_test:
+dummy_test: provide-libft
 	@echo 'A test when developing the Makefile (and makefile) for ft_printf'
 	@echo '1. Compiling tests'
 	@echo '   -->  $(OUT)'
@@ -39,7 +42,6 @@ dummy_test:
 	@echo '2. Executing tests'
 	@echo '      ./$(OUT)'
 	@./$(OUT)
-	
 
 .PHONY: alltests
 alltests:
@@ -48,3 +50,17 @@ alltests:
 .PHONY: fclean
 fclean:
 	$(RM) $(OUT)
+
+.PHONY: provide-libft
+provide-libft:
+	@echo "Checking if $(LIBFT_AR) is present ..."
+	@if [ ! -e $(LIBFT_AR) ]; then \
+	  echo '   ... Not found --> trying to create it'; \
+	  sleep 2; \
+	  make -C $(LIBFT_DIR) all; \
+	  -make -C $(LIBFT_DIR) bonus; \
+	  make -C $(LIBFT_DIR) clean; \
+	else \
+	  echo '   ... Found!'; \
+	fi
+
