@@ -6,7 +6,7 @@
 #    By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 21:15:03 by reciak            #+#    #+#              #
-#    Updated: 2025/06/04 12:01:37 by reciak           ###   ########.fr        #
+#    Updated: 2025/06/04 18:17:34 by reciak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ UNIT_TESTS_FILE := ft_printf-tests.c
 OUT := $(basename $(UNIT_TESTS_FILE))
 
 CC := cc
-CFLAGS =  -Wall -Wextra -Werror -I$(INC_DIR1) -I$(INC_DIR2)
+CFLAGS = -Wall -Wextra -Werror -Wno-format-security -I$(INC_DIR1) -I$(INC_DIR2)
 LFLAGS = -lcriterion $(LIBFT_AR)
 RM    := rm -f
 
@@ -31,11 +31,7 @@ SRCS := $(addprefix $(BASE_DIR),$(SRCS))
 SRCS := $(SRCS) $(UNIT_TESTS_FILE)
 
 .PHONY: unit-tests
-unit-tests: dummy_test
-
-.PHONY: dummy_test
-dummy_test: provide-libft
-	@echo 'A test when developing the Makefile (and makefile) for ft_printf'
+unit-tests: provide-libft
 	@echo '1. Compiling tests'
 	@echo '   -->  $(OUT)'
 	@$(CC) $(CFLAGS) $(SRCS) $(LFLAGS) -o $(OUT)
