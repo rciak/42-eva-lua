@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:41 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/03 19:56:32 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/04 11:05:27 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,6 @@
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 
+#include <stdio.h>
+#include <unistd.h>
 #include "ft_printf.h"
