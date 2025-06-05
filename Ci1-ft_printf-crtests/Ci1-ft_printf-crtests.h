@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:41 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/04 19:18:51 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/05 09:54:31 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <criterion/redirect.h>
 # include <criterion/parameterized.h>
 
+# include <stdarg.h>
 # include <stdio.h>
 # include <unistd.h>
 # include "ft_printf.h"
