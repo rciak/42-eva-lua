@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/05 11:51:28 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/06 16:34:56 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,56 +21,78 @@ Test(ft_printf, NULL_instead_string)
 //
 // 0. Only raw strings, no further arguments after that mandatory one
 //
-
-typedef struct s_params0
+typedef struct s0_param
 {
 	const char	*str;
-}	t_params0;
+}	t0_param;
 
-static void st_pre0(t_params0 *param)
+static void st0_ft_printf_redush(t0_param *param)
 {
-	ft_printf(param->str);
 	cr_redirect_stdout();
 	ft_printf(param->str);
 	fflush(stdout);
 }
-ParameterizedTestParameters(ft_printf, only_string_ori_behav_expected)
+static void st0_get_params(t0_param **param, size_t *nb_param)
 {
-	static t_params0 params[] = 
+	static t0_param param0[] = 
 	{
 		{"A "}, {"brave "}, {"camel "}, {"danced "}, {"energetic. "}, 
 		{""},
 		{"\n"}, {"\t"}, {"\r"}, {"%%"}, {"\b"} , {"cba%%"}, {"%"}, {"c%"},
 		{"\0"}, {"\t"}, {"\n"}, {"\a"}, {"\b"}, {"xFF"}
 	};
-	size_t nb_params = sizeof (params) / sizeof (t_params0);
-	return cr_make_param_array(t_params0, params, nb_params);
+	*param = param0;
+	*nb_param = sizeof(param0) / sizeof(t0_param);
+}
+//--
+ParameterizedTestParameters(ft_printf, only_string_same_reval_expected)
+{
+	t0_param *param;
+	size_t nb_param;
+
+	st0_get_params(&param, &nb_param);
+	return (cr_make_param_array(t0_param, param, nb_param));
+}
+ParameterizedTest(t0_param *param, ft_printf, only_string_same_reval_expected)
+{
+	int reval_ori = printf(param->str);
+	int reval_ft = ft_printf(param->str);
+	cr_assert(reval_ori == reval_ft);
+}
+//--
+ParameterizedTestParameters(ft_printf, only_string_ori_behav_expected)
+{
+	t0_param *param;
+	size_t nb_param;
+
+	st0_get_params(&param, &nb_param);
+	return (cr_make_param_array(t0_param, param, nb_param));
 }
 
-ParameterizedTest(t_params0 *param, ft_printf, only_string_ori_behav_expected)
+ParameterizedTest(t0_param *param, ft_printf, only_string_ori_behav_expected)
 {
 	char expected[1024];
 
-	st_pre0(param);
+	st0_ft_printf_redush(param);
 	sprintf(expected, param->str);
 	cr_assert_stdout_eq_str(expected);
 }
 ////
 ParameterizedTestParameters(ft_printf, only_string_diff_behav_expected)
 {
-	static t_params0 params[] = 
+	static t0_param param[] = 
 	{
 		{"%a"}, {"%e"}
 	};
-	size_t nb_params = sizeof (params) / sizeof (t_params0);
-	return cr_make_param_array(t_params0, params, nb_params);
+	size_t nb_param = sizeof (param) / sizeof (t0_param);
+	return cr_make_param_array(t0_param, param, nb_param);
 }
 
-ParameterizedTest(t_params0 *param, ft_printf, only_string_diff_behav_expected)
+ParameterizedTest(t0_param *param, ft_printf, only_string_diff_behav_expected)
 {
 	char ori_out[1024];
 
-	st_pre0(param);
+	st0_ft_printf_redush(param);
 	sprintf(ori_out, param->str);
 	cr_assert_stdout_neq_str(ori_out);
 }
@@ -95,13 +117,13 @@ ParameterizedTest(t_params0 *param, ft_printf, only_string_diff_behav_expected)
 // The tests for i
 
 
-// typedef struct s_params1
+// typedef struct s_param1
 // {
 // 	const char	*str;
 // 	const char
-// }	t_params0;
+// }	t0_param;
 
-// static void st_pre0(t_params0 *param)
+// static void st0_ft_printf_redush(t0_param *param)
 // {
 // 	ft_printf(param->str);
 // 	cr_redirect_stdout();
@@ -110,19 +132,19 @@ ParameterizedTest(t_params0 *param, ft_printf, only_string_diff_behav_expected)
 // }
 // ParameterizedTestParameters(ft_printf, only_string)
 // {
-// 	static t_params0 params[] = 
+// 	static t0_param param[] = 
 // 	{
 // 		{"A "}, {"bra "}, {"ka "}, {"da "}, {"bra! "}, 
 // 		{"\n"}, {""}, {"cba%%"}, {"c%"}
 // 	};
-// 	size_t nb_params = sizeof (params) / sizeof (t_params0);
-// 	return cr_make_param_array(t_params0, params, nb_params);
+// 	size_t nb_param = sizeof (param) / sizeof (t0_param);
+// 	return cr_make_param_array(t0_param, param, nb_param);
 // }
-// ParameterizedTest(t_params0 *param, ft_printf, only_string)
+// ParameterizedTest(t0_param *param, ft_printf, only_string)
 // {
 // 	char expected[1024];
 
-// 	st_pre0(param);
+// 	st0_ft_printf_redush(param);
 // 	sprintf(expected, param->str);
 // 	cr_expect_stdout_eq_str(expected);
 // }
