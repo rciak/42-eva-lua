@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/07 10:39:06 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/07 10:46:43 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,35 +198,3 @@ ParameterizedTest(t11c_param *param, ft_printf, one_arg_ori_behav_expected)
 	cr_assert_stdout_eq_str(expected);
 }
 
-
-// typedef struct s_param1
-// {
-// 	const char	*str;
-// 	const char
-// }	t0_param;
-
-// static void st0_ft_printf_redush(t0_param *param)
-// {
-// 	ft_printf(param->str);
-// 	cr_redirect_stdout();
-// 	ft_printf(param->str);
-// 	fflush(stdout);
-// }
-// ParameterizedTestParameters(ft_printf, only_string)
-// {
-// 	static t0_param param[] = 
-// 	{
-// 		{"A "}, {"bra "}, {"ka "}, {"da "}, {"bra! "}, 
-// 		{"\n"}, {""}, {"cba%%"}, {"c%"}
-// 	};
-// 	size_t nb_param = sizeof (param) / sizeof (t0_param);
-// 	return cr_make_param_array(t0_param, param, nb_param);
-// }
-// ParameterizedTest(t0_param *param, ft_printf, only_string)
-// {
-// 	char expected[1024];
-
-// 	st0_ft_printf_redush(param);
-// 	sprintf(expected, param->str);
-// 	cr_expect_stdout_eq_str(expected);
-// }
