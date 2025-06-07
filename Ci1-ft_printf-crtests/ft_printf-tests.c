@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/07 09:48:55 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/07 10:39:06 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,12 @@ Test(ft_printf, NULL_instead_string)
 ////////////////////////////////////////////////////////////////////////////////
 
 //
-// 0. a) common
+// 0. a) Testcases
 //
 typedef struct s0_param
 {
 	const char	*str;
 }	t0_param;
-
-static void st0_ft_printf_redush(t0_param *param)
-{
-	cr_redirect_stdout();
-	ft_printf(param->str);
-	fflush(stdout);
-}
 
 static void st0_get_params(t0_param **pparam, size_t *nb_param)
 {
@@ -89,7 +82,9 @@ ParameterizedTest(t0_param *param, ft_printf, only_string_ori_behav_expected)
 {
 	char expected[1024];
 
-	st0_ft_printf_redush(param);
+	cr_redirect_stdout();
+	ft_printf(param->str);
+	fflush(stdout);
 	sprintf(expected, param->str);
 	cr_assert_stdout_eq_str(expected);
 }
@@ -109,7 +104,9 @@ ParameterizedTest(t0_param *param, ft_printf, only_string_diff_behav_expected)
 {
 	char ori_out[1024];
 
-	st0_ft_printf_redush(param);
+	cr_redirect_stdout();
+	ft_printf(param->str);
+	fflush(stdout);
 	sprintf(ori_out, param->str);
 	cr_assert_stdout_neq_str(ori_out);
 }
@@ -134,7 +131,7 @@ ParameterizedTest(t0_param *param, ft_printf, only_string_diff_behav_expected)
 //
 
 //
-// 1.1(c) a) common
+// 1.1(c) a) Testcases
 //
 typedef struct s11c_param
 {
@@ -182,13 +179,6 @@ ParameterizedTest(t11c_param *param, ft_printf, one_arg_same_reval_expected)
 //
 // 1.1(c) c) same output?
 //
-static void st11c_ft_printf_redush(t11c_param *param)
-{
-	cr_redirect_stdout();
-	ft_printf(param->str, param->arg1);
-	fflush(stdout);
-}
-
 ParameterizedTestParameters(ft_printf, one_arg_ori_behav_expected)
 {
 	t0_param *param;
@@ -201,12 +191,12 @@ ParameterizedTest(t11c_param *param, ft_printf, one_arg_ori_behav_expected)
 {
 	char expected[1024];
 
-	st11c_ft_printf_redush(param);
+	cr_redirect_stdout();
+	ft_printf(param->str, param->arg1);
+	fflush(stdout);
 	sprintf(expected, param->str, param->arg1);
 	cr_assert_stdout_eq_str(expected);
 }
-
-
 
 
 // typedef struct s_param1
