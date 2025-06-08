@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/08 10:46:51 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/08 10:51:49 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,15 +268,15 @@ ParameterizedTest(t12s_param *param, ft_printf, s_one_arg_ori_behav_expected)
 ////////////////////////////////////////////////////////////////////////////////
 // 1.3(p)  a) Testcases
 //
-typedef struct s12p_param
+typedef struct s13p_param
 {
 	const char	*str;
 	void		*arg1;
-}	t12p_param;
+}	t13p_param;
 
-static void st12p_get_params(t12p_param **pparam, size_t *nb_param)
+static void st13p_get_params(t13p_param **pparam, size_t *nb_param)
 {
-	static t12p_param param[] =
+	static t13p_param param[] =
 	{
 		{"%pwas NULL", NULL},
 		{"%pA", (void*) 0x00}, {"brave %p", (void*) 0x0000000000000000}, 
@@ -303,20 +303,20 @@ static void st12p_get_params(t12p_param **pparam, size_t *nb_param)
 		{"%p%%", (void*) 0x00400def}, {"%%%p",   (void*) 0x00400314}
 	};
 	*pparam = param;
-	*nb_param = sizeof(param) / sizeof(t12p_param);
+	*nb_param = sizeof(param) / sizeof(t13p_param);
 }
 //
 // 1.1(c)  b) same return values?
 //
 ParameterizedTestParameters(ft_printf, p_one_arg_same_reval_expected)
 {
-	t12p_param *param;
+	t13p_param *param;
 	size_t nb_param;
 
-	st12p_get_params(&param, &nb_param);
-	return (cr_make_param_array(t12p_param, param, nb_param));
+	st13p_get_params(&param, &nb_param);
+	return (cr_make_param_array(t13p_param, param, nb_param));
 }
-ParameterizedTest(t12p_param *param, ft_printf, p_one_arg_same_reval_expected)
+ParameterizedTest(t13p_param *param, ft_printf, p_one_arg_same_reval_expected)
 {
 	int reval_ori = printf(param->str, param->arg1);
 	int reval_ft = ft_printf(param->str, param->arg1);
@@ -333,7 +333,7 @@ ParameterizedTestParameters(ft_printf, p_one_arg_ori_behav_expected)
 	st0_get_params(&param, &nb_param);
 	return (cr_make_param_array(t0_param, param, nb_param));
 }
-ParameterizedTest(t12p_param *param, ft_printf, p_one_arg_ori_behav_expected)
+ParameterizedTest(t13p_param *param, ft_printf, p_one_arg_ori_behav_expected)
 {
 	char expected[1024];
 
