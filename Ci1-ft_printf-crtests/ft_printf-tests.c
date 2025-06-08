@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/08 16:46:07 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/08 19:56:55 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,6 @@ ParameterizedTest(t0_param *param, ft_printf, only_string_diff_behav_expected)
 // Irregular Input 
 // Group 6: Examples of feasible in printf, but not in ft_printf: a, e
 //          --> different behaviour of ft_printf and printf is expected!
-// Group 7: nonsense stuff after '%' : '\0', '\t', '\n', '\a', '\b', 'xFF'
-//
 
 ////////////////////////////////////////////////////////////////////////////////
 // 1.1(c)  a) Testcases
