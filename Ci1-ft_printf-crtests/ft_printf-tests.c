@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/08 10:51:49 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/08 11:00:17 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,7 +306,7 @@ static void st13p_get_params(t13p_param **pparam, size_t *nb_param)
 	*nb_param = sizeof(param) / sizeof(t13p_param);
 }
 //
-// 1.1(c)  b) same return values?
+// 1.3(p)  b) same return values?
 //
 ParameterizedTestParameters(ft_printf, p_one_arg_same_reval_expected)
 {
@@ -323,7 +323,7 @@ ParameterizedTest(t13p_param *param, ft_printf, p_one_arg_same_reval_expected)
 	cr_assert(reval_ori == reval_ft);
 }
 //
-// 1.1(c) c) same output?
+// 1.3(p) c) same output?
 //
 ParameterizedTestParameters(ft_printf, p_one_arg_ori_behav_expected)
 {
