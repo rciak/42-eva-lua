@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/08 12:16:36 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/08 13:41:14 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -434,80 +434,79 @@ ParameterizedTest(t14di_param *param, ft_printf, di_one_arg_ori_behav_expected)
 
 
 
-			////////////////////////////////////////////////////////////////////////////////
-			// 1.5(u)  a) Testcases
-			//
-			typedef struct s15uxX_param
-			{
-				const char		*str;
-				unsigned int	arg1;
-			}	t15uxX_param;
+////////////////////////////////////////////////////////////////////////////////
+// 1.5(u, x, X)  a) Testcases
+//
+typedef struct s15uxX_param
+{
+	const char		*str;
+	unsigned int	arg1;
+}	t15uxX_param;
 
-			static void st15uxX_get_params(t15uxX_param **pparam, size_t *nb_param)
-			{
-				static t15uxX_param param[] =
-				{
-					{"%u", 0},
-					{"%u", -1},
-					{"%u", UINT_MAX},
-					{"%u\n", UINT_MAX - 1},
-					{"%x", 0},
-					{"%x", -1},
-					{"%x", UINT_MAX},
-					{"%x\n", UINT_MAX - 1},
-					{"%X", 0},
-					{"%X", -1},
-					{"%X", UINT_MAX},
-					{"%X\n", UINT_MAX - 1},
-					{"u: 9  --> |%u|\n", 9},
-					{"u: 10 --> |%u|\n", 10},
-					{"u: 11 --> |%u|\n", 11},
-					{"x: 15 --> |%x|\n", 15},
-					{"x: 16 --> |%x|\n", 16},
-					{"x: 17 --> |%x|\n", 17},
-					{"X: 15 --> |%X|\n", 15},
-					{"X: 16 --> |%X|\n", 16},
-					{"X: 17 --> |%X|\n", 17},
-				};
-				*pparam = param;
-				*nb_param = sizeof(param) / sizeof(t15uxX_param);
-			}
-			//
-			// 1.5(u)  b) same return values?
-			//
-			ParameterizedTestParameters(ft_printf, uxX_one_arg_same_reval_expected)
-			{
-				t15uxX_param *param;
-				size_t nb_param;
+static void st15uxX_get_params(t15uxX_param **pparam, size_t *nb_param)
+{
+	static t15uxX_param param[] =
+	{
+		{"%u", 0},
+		{"%u", -1},
+		{"%u", UINT_MAX},
+		{"%u\n", UINT_MAX - 1},
+		{"%x", 0},
+		{"%x", -1},
+		{"%x", UINT_MAX},
+		{"%x\n", UINT_MAX - 1},
+		{"%X", 0},
+		{"%X", -1},
+		{"%X", UINT_MAX},
+		{"%X\n", UINT_MAX - 1},
+		{"u: 9  --> |%u|\n", 9},
+		{"u: 10 --> |%u|\n", 10},
+		{"u: 11 --> |%u|\n", 11},
+		{"x: 15 --> |%x|\n", 15},
+		{"x: 16 --> |%x|\n", 16},
+		{"x: 17 --> |%x|\n", 17},
+		{"X: 15 --> |%X|\n", 15},
+		{"X: 16 --> |%X|\n", 16},
+		{"X: 17 --> |%X|\n", 17},
+	};
+	*pparam = param;
+	*nb_param = sizeof(param) / sizeof(t15uxX_param);
+}
+//
+// 1.5(u, x, X)  b) same return values?
+//
+ParameterizedTestParameters(ft_printf, uxX_one_arg_same_reval_expected)
+{
+	t15uxX_param *param;
+	size_t nb_param;
 
-				st15uxX_get_params(&param, &nb_param);
-				return (cr_make_param_array(t15uxX_param, param, nb_param));
-			}
-			ParameterizedTest(t15uxX_param *param, ft_printf, uxX_one_arg_same_reval_expected)
-			{
-				int reval_ori = printf(param->str, param->arg1);
-				int reval_ft = ft_printf(param->str, param->arg1);
-				cr_assert(reval_ori == reval_ft);
-			}
-			//
-			// 1.5(u) c) same output?
-			//
-			ParameterizedTestParameters(ft_printf, uxX_one_arg_ori_behav_expected)
-			{
-				t0_param *param;
-				size_t nb_param;
+	st15uxX_get_params(&param, &nb_param);
+	return (cr_make_param_array(t15uxX_param, param, nb_param));
+}
+ParameterizedTest(t15uxX_param *param, ft_printf, uxX_one_arg_same_reval_expected)
+{
+	int reval_ori = printf(param->str, param->arg1);
+	int reval_ft = ft_printf(param->str, param->arg1);
+	cr_assert(reval_ori == reval_ft);
+}
+//
+// 1.5(u, x, X) c) same output?
+//
+ParameterizedTestParameters(ft_printf, uxX_one_arg_ori_behav_expected)
+{
+	t0_param *param;
+	size_t nb_param;
 
-				st0_get_params(&param, &nb_param);
-				return (cr_make_param_array(t0_param, param, nb_param));
-			}
-			ParameterizedTest(t15uxX_param *param, ft_printf, uxX_one_arg_ori_behav_expected)
-			{
-				char expected[1024];
+	st0_get_params(&param, &nb_param);
+	return (cr_make_param_array(t0_param, param, nb_param));
+}
+ParameterizedTest(t15uxX_param *param, ft_printf, uxX_one_arg_ori_behav_expected)
+{
+	char expected[1024];
 
-				cr_redirect_stdout();
-				ft_printf(param->str, param->arg1);
-				fflush(stdout);
-				sprintf(expected, param->str, param->arg1);
-				cr_assert_stdout_eq_str(expected);
-			}
-
+	cr_redirect_stdout();
+	ft_printf(param->str, param->arg1);
+	fflush(stdout);
+	sprintf(expected, param->str, param->arg1);
+	cr_assert_stdout_eq_str(expected);
+}
