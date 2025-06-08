@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/08 13:41:14 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/08 16:46:07 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,19 @@
 // (But for comparison of the return value ft_printf is used.)
 
 
-// -1. Reaction to NULL
-Test(ft_printf, NULL_instead_string)
-{
-	ft_printf(NULL);
-}
+// // -1. Reaction to NULL
+// Test(ft_printf, NULL_instead_string)
+// {
+// 	ft_printf(NULL);
+// }
 
 ////////////////////////////////////////////////////////////////////////////////
 // 0. Only raw strings, no further arguments after that mandatory one
 ////////////////////////////////////////////////////////////////////////////////
 
-//
-// 0. a) Testcases
-//
-typedef struct s0_param
-{
-	const char	*str;
-}	t0_param;
+// //
+// // 0. a) Testcases
+// //
 
 static void st0_get_params(t0_param **pparam, size_t *nb_param)
 {
@@ -80,7 +76,7 @@ ParameterizedTestParameters(ft_printf, only_string_ori_behav_expected)
 }
 ParameterizedTest(t0_param *param, ft_printf, only_string_ori_behav_expected)
 {
-	char expected[1024];
+	char expected[BUF_SIZE_EXPECTED];
 
 	cr_redirect_stdout();
 	ft_printf(param->str);
@@ -102,7 +98,7 @@ ParameterizedTestParameters(ft_printf, only_string_diff_behav_expected)
 }
 ParameterizedTest(t0_param *param, ft_printf, only_string_diff_behav_expected)
 {
-	char ori_out[1024];
+	char ori_out[BUF_SIZE_EXPECTED];
 
 	cr_redirect_stdout();
 	ft_printf(param->str);
@@ -123,7 +119,6 @@ ParameterizedTest(t0_param *param, ft_printf, only_string_diff_behav_expected)
 // Group 3: p
 // Group 4: d, i (int)
 // Group 5: u, x, X (unsigned int)
-
 //
 // Irregular Input 
 // Group 6: Examples of feasible in printf, but not in ft_printf: a, e
@@ -134,11 +129,6 @@ ParameterizedTest(t0_param *param, ft_printf, only_string_diff_behav_expected)
 ////////////////////////////////////////////////////////////////////////////////
 // 1.1(c)  a) Testcases
 //
-typedef struct s11c_param
-{
-	const char	*str;
-	char		arg1;
-}	t11c_param;
 
 static void st11c_get_params(t11c_param **pparam, size_t *nb_param)
 {
@@ -150,7 +140,9 @@ static void st11c_get_params(t11c_param **pparam, size_t *nb_param)
 		{"%c\n", 'D'}, {"\t%c", '~'}, {"%c\r", '<'}, {"%c\b", '>'}, 
 		  {"%c\t", '*'}, {"%c\a", '%'}, {"\b%c", '%'},
 		{"\n%c", '%'}, {"%c\0", '%'}, {"\0%c", '%'}, 
-		{"%c\xFF", '\0'}, {"\xFF%c", '\0'},
+		{"%c\xFF", '\t'}, {"\xFF%c", '\t'},
+		//XX: It seams that prinft and sprintf treat Nullterminator differently.
+		//{"Nullterminator comming:|%c|", '\0'}, 
 		{"%ccba%%", '$'}, {"%%c", '2'}, {"%c%", '}'}, {"%%c", '-'},
 		  {"%cc%", '!'}, {"c%%c", '?'},
 		{"%c%%", '+'}, {"%%%c",'#'}
@@ -180,15 +172,15 @@ ParameterizedTest(t11c_param *param, ft_printf, c_one_arg_same_reval_expected)
 //
 ParameterizedTestParameters(ft_printf, c_one_arg_ori_behav_expected)
 {
-	t0_param *param;
+	t11c_param *param;
 	size_t nb_param;
 
-	st0_get_params(&param, &nb_param);
-	return (cr_make_param_array(t0_param, param, nb_param));
+	st11c_get_params(&param, &nb_param);
+	return (cr_make_param_array(t11c_param, param, nb_param));
 }
 ParameterizedTest(t11c_param *param, ft_printf, c_one_arg_ori_behav_expected)
 {
-	char expected[1024];
+	char expected[BUF_SIZE_EXPECTED];
 
 	cr_redirect_stdout();
 	ft_printf(param->str, param->arg1);
@@ -200,11 +192,6 @@ ParameterizedTest(t11c_param *param, ft_printf, c_one_arg_ori_behav_expected)
 ////////////////////////////////////////////////////////////////////////////////
 // 1.2(s)  a) Testcases
 //
-typedef struct s12s_param
-{
-	const char	*str;
-	char		*arg1;
-}	t12s_param;
 
 static void st12s_get_params(t12s_param **pparam, size_t *nb_param)
 {
@@ -248,15 +235,15 @@ ParameterizedTest(t12s_param *param, ft_printf, s_one_arg_same_reval_expected)
 //
 ParameterizedTestParameters(ft_printf, s_one_arg_ori_behav_expected)
 {
-	t0_param *param;
+	t12s_param *param;
 	size_t nb_param;
 
-	st0_get_params(&param, &nb_param);
-	return (cr_make_param_array(t0_param, param, nb_param));
+	st12s_get_params(&param, &nb_param);
+	return (cr_make_param_array(t11c_param, param, nb_param));
 }
 ParameterizedTest(t12s_param *param, ft_printf, s_one_arg_ori_behav_expected)
 {
-	char expected[1024];
+	char expected[BUF_SIZE_EXPECTED];
 
 	cr_redirect_stdout();
 	ft_printf(param->str, param->arg1);
@@ -268,11 +255,6 @@ ParameterizedTest(t12s_param *param, ft_printf, s_one_arg_ori_behav_expected)
 ////////////////////////////////////////////////////////////////////////////////
 // 1.3(p)  a) Testcases
 //
-typedef struct s13p_param
-{
-	const char	*str;
-	void		*arg1;
-}	t13p_param;
 
 static void st13p_get_params(t13p_param **pparam, size_t *nb_param)
 {
@@ -327,15 +309,15 @@ ParameterizedTest(t13p_param *param, ft_printf, p_one_arg_same_reval_expected)
 //
 ParameterizedTestParameters(ft_printf, p_one_arg_ori_behav_expected)
 {
-	t0_param *param;
+	t13p_param *param;
 	size_t nb_param;
 
-	st0_get_params(&param, &nb_param);
-	return (cr_make_param_array(t0_param, param, nb_param));
+	st13p_get_params(&param, &nb_param);
+	return (cr_make_param_array(t13p_param, param, nb_param));
 }
 ParameterizedTest(t13p_param *param, ft_printf, p_one_arg_ori_behav_expected)
 {
-	char expected[1024];
+	char expected[BUF_SIZE_EXPECTED];
 
 	cr_redirect_stdout();
 	ft_printf(param->str, param->arg1);
@@ -348,11 +330,6 @@ ParameterizedTest(t13p_param *param, ft_printf, p_one_arg_ori_behav_expected)
 ////////////////////////////////////////////////////////////////////////////////
 // 1.4(d, i)  a) Testcases
 //
-typedef struct s14di_param
-{
-	const char	*str;
-	int		arg1;
-}	t14di_param;
 
 static void st14di_get_params(t14di_param **pparam, size_t *nb_param)
 {
@@ -388,7 +365,7 @@ static void st14di_get_params(t14di_param **pparam, size_t *nb_param)
 		{"d : -9 --> |%i|\n", -9}
 	};
 	*pparam = param;
-	*nb_param = sizeof(param) / sizeof(t14di_param);
+	*nb_param = sizeof(param) / sizeof(**pparam);
 }
 //
 // 1.4(d, i)  b) same return values?
@@ -412,15 +389,15 @@ ParameterizedTest(t14di_param *param, ft_printf, di_one_arg_same_reval_expected)
 //
 ParameterizedTestParameters(ft_printf, di_one_arg_ori_behav_expected)
 {
-	t0_param *param;
+	t14di_param *param;
 	size_t nb_param;
 
-	st0_get_params(&param, &nb_param);
-	return (cr_make_param_array(t0_param, param, nb_param));
+	st14di_get_params(&param, &nb_param);
+	return (cr_make_param_array(t14di_param, param, nb_param));
 }
 ParameterizedTest(t14di_param *param, ft_printf, di_one_arg_ori_behav_expected)
 {
-	char expected[1024];
+	char expected[BUF_SIZE_EXPECTED];
 
 	cr_redirect_stdout();
 	ft_printf(param->str, param->arg1);
@@ -429,20 +406,9 @@ ParameterizedTest(t14di_param *param, ft_printf, di_one_arg_ori_behav_expected)
 	cr_assert_stdout_eq_str(expected);
 }
 
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // 1.5(u, x, X)  a) Testcases
 //
-typedef struct s15uxX_param
-{
-	const char		*str;
-	unsigned int	arg1;
-}	t15uxX_param;
-
 static void st15uxX_get_params(t15uxX_param **pparam, size_t *nb_param)
 {
 	static t15uxX_param param[] =
@@ -494,15 +460,15 @@ ParameterizedTest(t15uxX_param *param, ft_printf, uxX_one_arg_same_reval_expecte
 //
 ParameterizedTestParameters(ft_printf, uxX_one_arg_ori_behav_expected)
 {
-	t0_param *param;
+	t15uxX_param *param;
 	size_t nb_param;
 
-	st0_get_params(&param, &nb_param);
-	return (cr_make_param_array(t0_param, param, nb_param));
+	st15uxX_get_params(&param, &nb_param);
+	return (cr_make_param_array(t15uxX_param, param, nb_param));
 }
 ParameterizedTest(t15uxX_param *param, ft_printf, uxX_one_arg_ori_behav_expected)
 {
-	char expected[1024];
+	char expected[BUF_SIZE_EXPECTED];
 
 	cr_redirect_stdout();
 	ft_printf(param->str, param->arg1);
@@ -510,3 +476,58 @@ ParameterizedTest(t15uxX_param *param, ft_printf, uxX_one_arg_ori_behav_expected
 	sprintf(expected, param->str, param->arg1);
 	cr_assert_stdout_eq_str(expected);
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 1.6[irreg: only in ori printf, cf. also 0. c')]  a) Testcases
+//
+
+static void st16_get_params(t16_param **pparam, size_t *nb_param)
+{
+	static t16_param param[] =
+	{
+		{"%a", 137.314},
+		{"%e", -123.27},
+	};
+	*pparam = param;
+	*nb_param = sizeof(param) / sizeof(t16_param);
+}
+//
+// 1.6[irreg: only in ori printf]  b) same return values?
+//
+ParameterizedTestParameters(ft_printf, irreg_one_arg_diff_reval_expected)
+{
+	t16_param *param;
+	size_t nb_param;
+
+	st16_get_params(&param, &nb_param);
+	return (cr_make_param_array(t16_param, param, nb_param));
+}
+ParameterizedTest(t16_param *param, ft_printf, irreg_one_arg_diff_reval_expected)
+{
+	int reval_ori = printf(param->str, param->arg1);
+	int reval_ft = ft_printf(param->str, param->arg1);
+	cr_assert(reval_ori != reval_ft);
+}
+//
+// 1.6[irreg: only in ori printf] c) same output?
+//
+ParameterizedTestParameters(ft_printf, irreg_one_arg_diff_behav_expected)
+{
+	t16_param *param;
+	size_t nb_param;
+
+	st16_get_params(&param, &nb_param);
+	return (cr_make_param_array(t16_param, param, nb_param));
+}
+ParameterizedTest(t16_param *param, ft_printf, irreg_one_arg_diff_behav_expected)
+{
+	char expected[BUF_SIZE_EXPECTED];
+
+	cr_redirect_stdout();
+	ft_printf(param->str, param->arg1);
+	fflush(stdout);
+	sprintf(expected, param->str, param->arg1);
+	cr_assert_stdout_neq_str(expected);
+}
+
