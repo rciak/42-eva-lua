@@ -6,7 +6,7 @@
 #    By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 21:15:03 by reciak            #+#    #+#              #
-#    Updated: 2025/06/04 19:48:32 by reciak           ###   ########.fr        #
+#    Updated: 2025/06/08 10:33:08 by reciak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR1) -I$(INC_DIR2)
 ifdef DEV
   CFLAGS += -Wno-format-security
 else
-  $(info *********************************************************************)
-  $(info *                  !! IMPORTANT NOTE !!                             *)
-  $(info *                                                                   *)
-  $(info * In case of compiler error try running with the flag  DEV  set     *)
-  $(info * make DEV=1                                                        *)
-  $(info *********************************************************************)
+  $(info **********************************************************************)
+  $(info *                  !! IMPORTANT NOTE !!                              *)
+  $(info *                                                                    *)
+  $(info * In case of compiler error try running make with flag  DEV  , e.g.  *)
+  $(info * make DEV=1 unit-tests                                              *)
+  $(info **********************************************************************)
 endif
 LFLAGS = -lcriterion $(LIBFT_AR)
 RM    := rm -f

@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/07 11:40:28 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/08 10:46:51 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ typedef struct s12s_param
 {
 	const char	*str;
 	char		*arg1;
-}	t12p_param;
+}	t12s_param;
 
 static void st12s_get_params(t12s_param **pparam, size_t *nb_param)
 {
@@ -213,7 +213,7 @@ static void st12s_get_params(t12s_param **pparam, size_t *nb_param)
 		{"%sA", NULL},
 		{"%sA", "Servus & Ahoi!"}, {"brave %s", "B"}, 
 		  {"camel |%s|danced ", "(◕‿◕)"},
-		  {"s%space", "      "},
+		{"s%space", "      \n"},
 		{"%s", ""},
 		{"%s\n", "Dodelido"}, {"\t%s", "~~~"}, {"%s\r", "<#>"}, {"%s\b", ">-("}, 
 		  {"%s\t", "*df"}, {"%s\a", "%"}, {"\b%s", "%"},
@@ -278,29 +278,29 @@ static void st12p_get_params(t12p_param **pparam, size_t *nb_param)
 {
 	static t12p_param param[] =
 	{
-		{"%swas NULL", NULL},
-		{"%sA", (void*) 0x00}, {"brave %s", (void*) 0x0000000000000000}, 
-		  {"camel |%s|danced ", (void*)  0x00000000DEADBEEF},
-		  {"s%space", (void*) 0xDEADBEEFDEADBEEF},
-		{"%s", (void*)  0xFFFFFFFFFFFFFFFF},
-		{"%s\n", (void*) 0x000000007FFFFFFF},
-		  {"\t%s", (void*) 0x7FFFFFFFFFFFFFFF},
-		  {"%s\r", (void*) 0x0000000020000000}, 
-		  {"%s\b", (void*) 0x0000000000400000}, 
-		  {"%s\t", (void*) 0x0000000000400001}, 
-		  {"%s\a", (void*)  0x0000000000400002}, 
-		  {"\b%s", (void*) 0x0000000000400003},
-		{"\n%s", (void*) 0x000000000040000f},
-		{"%s\0", (void*)  0x00000000004000FF}, 
-		{"\0%s", (void*)  0x00000000004000ab}, 
-		{"%s\xFF", (void*)  0xFFFFFFFFFFFFFFFF},
-		{"\xFF%s", (void*)  0xFFFFFFFFFFFFFFFF},
-		{"%scba%%", (void*) 0x00000000}, 
-		{"%%s", (void*) 0xDEADBEEF}, 
-		{"%s%", (void*) 0x7FFFFFFF}, 
-		  {"%%s", (void*) 0x20000000},
-		  {"%sc%", (void*)  0x00400000}, {"c%%s", (void*) 0x00400abc},
-		{"%s%%", (void*) 0x00400def}, {"%%%s",   (void*) 0x00400314}
+		{"%pwas NULL", NULL},
+		{"%pA", (void*) 0x00}, {"brave %p", (void*) 0x0000000000000000}, 
+		  {"camel |%p|danced ", (void*)  0x00000000DEADBEEF},
+		  {"s%ppace", (void*) 0xDEADBEEFDEADBEEF},
+		{"%p", (void*)  0xFFFFFFFFFFFFFFFF},
+		{"%p\n", (void*) 0x000000007FFFFFFF},
+		  {"\t%p", (void*) 0x7FFFFFFFFFFFFFFF},
+		  {"%p\r", (void*) 0x0000000020000000}, 
+		  {"%p\b", (void*) 0x0000000000400000}, 
+		  {"%p\t", (void*) 0x0000000000400001}, 
+		  {"%p\a", (void*)  0x0000000000400002}, 
+		  {"\b%p", (void*) 0x0000000000400003},
+		{"\n%p", (void*) 0x000000000040000f},
+		{"%p\0", (void*)  0x00000000004000FF}, 
+		{"\0%p", (void*)  0x00000000004000ab}, 
+		{"%p\xFF", (void*)  0xFFFFFFFFFFFFFFFF},
+		{"\xFF%p", (void*)  0xFFFFFFFFFFFFFFFF},
+		{"%pcba%%", (void*) 0x00000000}, 
+		{"%%p", (void*) 0xDEADBEEF}, 
+		{"%p%", (void*) 0x7FFFFFFF}, 
+		  {"%%p", (void*) 0x20000000},
+		  {"%pc%", (void*)  0x00400000}, {"c%%p", (void*) 0x00400abc},
+		{"%p%%", (void*) 0x00400def}, {"%%%p",   (void*) 0x00400314}
 	};
 	*pparam = param;
 	*nb_param = sizeof(param) / sizeof(t12p_param);
@@ -325,7 +325,7 @@ ParameterizedTest(t12p_param *param, ft_printf, p_one_arg_same_reval_expected)
 //
 // 1.1(c) c) same output?
 //
-ParameterizedTestParameters(ft_printf, s_one_arg_ori_behav_expected)
+ParameterizedTestParameters(ft_printf, p_one_arg_ori_behav_expected)
 {
 	t0_param *param;
 	size_t nb_param;
@@ -333,7 +333,7 @@ ParameterizedTestParameters(ft_printf, s_one_arg_ori_behav_expected)
 	st0_get_params(&param, &nb_param);
 	return (cr_make_param_array(t0_param, param, nb_param));
 }
-ParameterizedTest(t12p_param *param, ft_printf, s_one_arg_ori_behav_expected)
+ParameterizedTest(t12p_param *param, ft_printf, p_one_arg_ori_behav_expected)
 {
 	char expected[1024];
 
