@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/08 11:17:30 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/08 12:08:31 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,22 +371,21 @@ static void st14di_get_params(t14di_param **pparam, size_t *nb_param)
 		{"%%%i", 123},
 		{"Now with conversition d that should behave the same as i |%d|", 0},
 		{"+0: %i\n", +0},
-		{"d = -0  --> |%i|\n", -0},
-		{"d = 10  --> |%i|\n", 10},
-		{"d = +10 --> |%i|\n", +10},
-		{"d = -10 --> |%i|\n", -10},
-		{"d = INT_MAX     --> |%i|\n", INT_MAX},
-		{"d = INT_MIN     --> |%i|\n", INT_MIN},
-		{"d = INT_MAX - 1 --> |%i|\n", INT_MAX - 1},
-		{"d = INT_MIN + 1 --> |%i|\n", INT_MIN + 1},
-							{"d = -0  --> |%i|\n", -0},
-		{"Additional d = 1  --> |%i|\n", 1},
-		{"d = +1 --> |%i|\n", +1},
-		{"d = -1 --> |%i|\n", -1},
-		{"d = +2 --> |%i|\n", +2},
-		{"d = -2 --> |%i|\n", -2},
-		{"d = +9 --> |%i|\n", +9},
-		{"d = -9 --> |%i|\n", -9}
+		{"d: -0  --> |%i|\n", -0},
+		{"d: 10  --> |%i|\n", 10},
+		{"d: +10 --> |%i|\n", +10},
+		{"d: -10 --> |%i|\n", -10},
+		{"d: INT_MAX     --> |%i|\n", INT_MAX},
+		{"d: INT_MIN     --> |%i|\n", INT_MIN},
+		{"d: INT_MAX - 1 --> |%i|\n", INT_MAX - 1},
+		{"d: INT_MIN + 1 --> |%i|\n", INT_MIN + 1},
+		{"Additional d : 1  --> |%i|\n", 1},
+		{"d : +1 --> |%i|\n", +1},
+		{"d : -1 --> |%i|\n", -1},
+		{"d : +2 --> |%i|\n", +2},
+		{"d : -2 --> |%i|\n", -2},
+		{"d : +9 --> |%i|\n", +9},
+		{"d : -9 --> |%i|\n", -9}
 	};
 	*pparam = param;
 	*nb_param = sizeof(param) / sizeof(t14di_param);
