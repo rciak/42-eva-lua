@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/08 11:00:17 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/08 11:17:30 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,92 @@ ParameterizedTestParameters(ft_printf, p_one_arg_ori_behav_expected)
 	return (cr_make_param_array(t0_param, param, nb_param));
 }
 ParameterizedTest(t13p_param *param, ft_printf, p_one_arg_ori_behav_expected)
+{
+	char expected[1024];
+
+	cr_redirect_stdout();
+	ft_printf(param->str, param->arg1);
+	fflush(stdout);
+	sprintf(expected, param->str, param->arg1);
+	cr_assert_stdout_eq_str(expected);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 1.4(d, i)  a) Testcases
+//
+typedef struct s14di_param
+{
+	const char	*str;
+	int		arg1;
+}	t14di_param;
+
+static void st14di_get_params(t14di_param **pparam, size_t *nb_param)
+{
+	static t14di_param param[] =
+	{
+		{"%i", 0},
+		{"%i", +0},
+		{"%i", -0},
+		{"%i", 10},
+		{"%i", +10},
+		{"%i", -10},
+		{"%i", INT_MAX},
+		{"%i", INT_MIN},
+		{"%i", INT_MAX - 1},
+		{"%i", INT_MIN + 1},
+		{"%%%i", 123},
+		{"Now with conversition d that should behave the same as i |%d|", 0},
+		{"+0: %i\n", +0},
+		{"d = -0  --> |%i|\n", -0},
+		{"d = 10  --> |%i|\n", 10},
+		{"d = +10 --> |%i|\n", +10},
+		{"d = -10 --> |%i|\n", -10},
+		{"d = INT_MAX     --> |%i|\n", INT_MAX},
+		{"d = INT_MIN     --> |%i|\n", INT_MIN},
+		{"d = INT_MAX - 1 --> |%i|\n", INT_MAX - 1},
+		{"d = INT_MIN + 1 --> |%i|\n", INT_MIN + 1},
+							{"d = -0  --> |%i|\n", -0},
+		{"Additional d = 1  --> |%i|\n", 1},
+		{"d = +1 --> |%i|\n", +1},
+		{"d = -1 --> |%i|\n", -1},
+		{"d = +2 --> |%i|\n", +2},
+		{"d = -2 --> |%i|\n", -2},
+		{"d = +9 --> |%i|\n", +9},
+		{"d = -9 --> |%i|\n", -9}
+	};
+	*pparam = param;
+	*nb_param = sizeof(param) / sizeof(t14di_param);
+}
+//
+// 1.4(d, i)  b) same return values?
+//
+ParameterizedTestParameters(ft_printf, di_one_arg_same_reval_expected)
+{
+	t14di_param *param;
+	size_t nb_param;
+
+	st14di_get_params(&param, &nb_param);
+	return (cr_make_param_array(t14di_param, param, nb_param));
+}
+ParameterizedTest(t14di_param *param, ft_printf, di_one_arg_same_reval_expected)
+{
+	int reval_ori = printf(param->str, param->arg1);
+	int reval_ft = ft_printf(param->str, param->arg1);
+	cr_assert(reval_ori == reval_ft);
+}
+//
+// 1.4(d, i) c) same output?
+//
+ParameterizedTestParameters(ft_printf, di_one_arg_ori_behav_expected)
+{
+	t0_param *param;
+	size_t nb_param;
+
+	st0_get_params(&param, &nb_param);
+	return (cr_make_param_array(t0_param, param, nb_param));
+}
+ParameterizedTest(t14di_param *param, ft_printf, di_one_arg_ori_behav_expected)
 {
 	char expected[1024];
 
