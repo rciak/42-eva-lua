@@ -6,7 +6,7 @@
 #    By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 21:15:03 by reciak            #+#    #+#              #
-#    Updated: 2025/06/08 10:33:08 by reciak           ###   ########.fr        #
+#    Updated: 2025/06/08 13:05:56 by reciak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,21 @@ OUT := $(basename $(UNIT_TESTS_FILE))
 
 CC := cc
 CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR1) -I$(INC_DIR2)
-ifdef DEV
+
+
+ifeq ($(DEV), 1)
   CFLAGS += -Wno-format-security
 else
-  $(info **********************************************************************)
-  $(info *                  !! IMPORTANT NOTE !!                              *)
-  $(info *                                                                    *)
-  $(info * In case of compiler error try running make with flag  DEV  , e.g.  *)
-  $(info * make DEV=1 unit-tests                                              *)
-  $(info **********************************************************************)
+  ifneq ($(PRINT_NOTE), 0)
+    $(info **********************************************************************)
+    $(info *                  !! IMPORTANT NOTE !!                              *)
+    $(info *                                                                    *)
+    $(info * In case of compiler error try running make with flag  DEV  , e.g.  *)
+    $(info *   make DEV=1 unit-tests                                            *)
+    $(info * Suppress Output to stdout:                                         *)
+    $(info *   make DEV=1 unit-tests  >  /dev/null                              *)
+    $(info **********************************************************************)
+  endif
 endif
 LFLAGS = -lcriterion $(LIBFT_AR)
 RM    := rm -f
