@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/09 12:35:38 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/09 13:14:28 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -528,4 +528,78 @@ ParameterizedTest(t16_param *param, ft_printf, irreg_one_arg_diff_behav_expected
 	sprintf(expected, param->str, param->arg1);
 	cr_assert_stdout_neq_str(expected);
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 2. Some testing of output when there are more than one additional arguments
+////////////////////////////////////////////////////////////////////////////////
+
+Test(ft_printf, tests_with_two_additional_parameters)
+{
+
+}
+// More generic with again separation of testcases and test code 
+// might potentially achieved by combing the following ingredients properly
+// Due to given time constraints I will not try it tough currently,
+// but just list them here:
+
+/*
+
+*/
+
+/*
+#include <stdio.h>
+
+enum ValueType {
+    INT_TYPE,
+    FLOAT_TYPE,
+    STRING_TYPE
+};
+
+union ValueData {
+    int i;
+    float f;
+    char* s;
+};
+
+struct Variant {
+    enum ValueType type;
+    union ValueData data;
+};
+
+void printVariant(struct Variant v) {
+    switch (v.type) {
+        case INT_TYPE:
+            printf("Integer: %d\n", v.data.i);
+            break;
+        case FLOAT_TYPE:
+            printf("Float: %.2f\n", v.data.f);
+            break;
+        case STRING_TYPE:
+            printf("String: %s\n", v.data.s);
+            break;
+    }
+}
+
+/// rather make an array of struct Variant?!!
+int main() {
+    struct Variant v1, v2, v3;
+
+    v1.type = INT_TYPE;
+    v1.data.i = 42;
+
+    v2.type = FLOAT_TYPE;
+    v2.data.f = 3.14f;
+
+    v3.type = STRING_TYPE;
+    v3.data.s = "Hello, world!";
+
+    printVariant(v1);
+    printVariant(v2);
+    printVariant(v3);
+
+    return 0;
+}
+*/
+
 
