@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:50 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/08 19:56:55 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/09 12:35:38 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 // (But for comparison of the return value ft_printf is used.)
 
 
-// // -1. Reaction to NULL
-// Test(ft_printf, NULL_instead_string)
-// {
-// 	ft_printf(NULL);
-// }
+// -1. Reaction to NULL
+Test(ft_printf, NULL_instead_string)
+{
+	ft_printf(NULL);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // 0. Only raw strings, no further arguments after that mandatory one
