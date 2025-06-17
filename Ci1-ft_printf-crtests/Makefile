@@ -6,13 +6,14 @@
 #    By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 21:15:03 by reciak            #+#    #+#              #
-#    Updated: 2025/06/17 18:00:11 by reciak           ###   ########.fr        #
+#    Updated: 2025/06/17 19:38:45 by reciak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # DO NOT CHANGE
-PROJECT_TITLE   := ft_printf
-UNIT_TESTS_FILE := ft_printf-tests.c
+PROJECT_TITLE    := ft_printf
+UNIT_TESTS_FILE  := ft_printf-tests.c
+MANUAL_TEST_FILE := manual_test_ft_printf.c
 
 # ADOPT:
 #   BASE_DIR:      Location of Makefile (the one that builts the project target)
@@ -23,13 +24,17 @@ BASE_DIR        := ../../
 INC_DIRS        := inc/  libft/
 LIB_FILE_NAME   := libftprintf.a
 
-INC_DIRS := $(addprefix -I$(BASE_DIR),$(INC_DIRS))
-OUT      := $(basename $(UNIT_TESTS_FILE))
-LIB_FILE := $(BASE_DIR)$(LIB_FILE_NAME)
+INC_DIRS      := $(addprefix -I$(BASE_DIR),$(INC_DIRS))
+OUT_UNIT_TEST := $(basename $(UNIT_TESTS_FILE))
+LIB_FILE      := $(BASE_DIR)$(LIB_FILE_NAME)
 
 CC     := cc
-CFLAGS := -Wall -Wextra -Werror $(INC_DIRS)
-CFLAGS += -Wno-format-security    #To prevent warning issues (printf -security)
+CFLAGS := -Wall -Wextra -Werror
+CFLAGS += -Wno-format-security#To prevent warning issues (printf -security)
+CFLAGS += $(INC_DIRS)
+ifeq ($(DEBUG), 1)
+	CFLAGS += -tidy -g3 -fsanitize=address,undefined,leak
+endif
 LFLAGS = -lcriterion $(LIB_FILE)
 RM    := rm -f
 
@@ -49,16 +54,22 @@ unit-tests:
 	  echo '   ... Found! Continuing.'; \
 	fi
 	@echo '2. Compiling tests'
-	@echo '   -->  $(OUT)'
-	@$(CC) $(CFLAGS) $(UNIT_TESTS_FILE) $(LFLAGS) -o $(OUT)
+	@echo '   -->  $(OUT_UNIT_TEST)'
+	@$(CC) $(CFLAGS) $(UNIT_TESTS_FILE) $(LFLAGS) -o $(OUT_UNIT_TEST)
 	@echo '3. Executing tests'
-	@echo '      ./$(OUT)'
+	@echo '      ./$(OUT_UNIT_TEST)'
 	@echo
-	@./$(OUT)
+	@./$(OUT_UNIT_TEST)
+
+OUT_MAN_TEST = $(patsubst %.c,%,$(MANUAL_TEST_FILE))
+.PHONY: manual-test
+manual-test:
+	$(CC) $(CFLAGS) $(MANUAL_TEST_FILE) $(LIB_FILE) -o $(OUT_MAN_TEST)
 
 .PHONY: fclean
 fclean:
-	$(RM) $(OUT)
+	$(RM) $(OUT_UNIT_TEST)
+	$(RM) $(OUT_MAN_TEST)
 
 .PHONY: re
 re: fclean unit-tests
