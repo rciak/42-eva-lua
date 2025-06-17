@@ -6,14 +6,14 @@
 #    By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 21:15:03 by reciak            #+#    #+#              #
-#    Updated: 2025/06/17 19:38:45 by reciak           ###   ########.fr        #
+#    Updated: 2025/06/17 19:54:02 by reciak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # DO NOT CHANGE
 PROJECT_TITLE    := ft_printf
 UNIT_TESTS_FILE  := ft_printf-tests.c
-MANUAL_TEST_FILE := manual_test_ft_printf.c
+SRC_MANUAL_TEST := manual_test_ft_printf.c
 
 # ADOPT:
 #   BASE_DIR:      Location of Makefile (the one that builts the project target)
@@ -61,10 +61,12 @@ unit-tests:
 	@echo
 	@./$(OUT_UNIT_TEST)
 
-OUT_MAN_TEST = $(patsubst %.c,%,$(MANUAL_TEST_FILE))
+OUT_MAN_TEST = $(patsubst %.c,%,$(SRC_MANUAL_TEST))
 .PHONY: manual-test
 manual-test:
-	$(CC) $(CFLAGS) $(MANUAL_TEST_FILE) $(LIB_FILE) -o $(OUT_MAN_TEST)
+	$(CC) $(CFLAGS) $(SRC_MANUAL_TEST) $(LIB_FILE) -o $(OUT_MAN_TEST)
+	@echo 'Sample use of manual test:'
+	@echo "  ./$(OUT_MAN_TEST) 'dog' -23 11"
 
 .PHONY: fclean
 fclean:
