@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:26:26 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/17 18:11:23 by reciak           ###   ########.fr       */
+/*   Updated: 2025/06/17 22:01:23 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "ft_printf.h"
 
 
