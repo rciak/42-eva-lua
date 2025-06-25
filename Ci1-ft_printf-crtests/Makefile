@@ -33,7 +33,7 @@ CFLAGS := -Wall -Wextra -Werror
 CFLAGS += -Wno-format-security#To prevent warning issues (printf -security)
 CFLAGS += $(INC_DIRS)
 ifeq ($(DEBUG), 1)
-	CFLAGS += -tidy -g3 -fsanitize=address,undefined,leak
+	CFLAGS += -g3 -fsanitize=address,undefined,leak
 endif
 LFLAGS = -lcriterion $(LIB_FILE)
 RM    := rm -f
