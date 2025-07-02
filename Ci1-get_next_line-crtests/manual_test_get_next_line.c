@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 10:32:25 by reciak            #+#    #+#             */
-/*   Updated: 2025/06/28 13:58:11 by reciak           ###   ########.fr       */
+/*   Updated: 2025/07/02 18:10:06 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void test_gnl_read_whole_files_and_extra_times_after(int *fd)
 
 void tests_gnl(void) 
 {
-	int fd[6];
+	int fd[7];
 
 	openall(fd);
 		test_gnl_bonus(fd);
