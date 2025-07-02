@@ -6,7 +6,7 @@
 /*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 10:32:25 by reciak            #+#    #+#             */
-/*   Updated: 2025/07/02 18:10:06 by reciak           ###   ########.fr       */
+/*   Updated: 2025/07/02 18:15:17 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 void openall(int *fd)
 {
-    char *filename01 = "test01.txt";
+	char *filename01 = "test01.txt";
 	char *filename02 = "test02.txt";
 	char *filename03 = "test03_tiny_segfault_hunting.txt";
 	char *filename04 = "test04_emptyfile.txt";
