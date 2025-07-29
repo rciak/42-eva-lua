@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manual-test.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: rene <rene@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:00:45 by reciak            #+#    #+#             */
-/*   Updated: 2025/07/28 15:12:45 by reciak           ###   ########.fr       */
+/*   Updated: 2025/07/29 19:54:24 by rene             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # include <stdint.h>
 
 void	print_stacks(t_dl_node	**stack);
+void	print_single_stack(t_dl_node	*one_stack);
 
 #endif

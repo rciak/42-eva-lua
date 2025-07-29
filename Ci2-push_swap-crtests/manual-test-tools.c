@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manual-test-tools.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: rene <rene@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:11:56 by reciak            #+#    #+#             */
-/*   Updated: 2025/07/29 17:55:45 by reciak           ###   ########.fr       */
+/*   Updated: 2025/07/29 20:10:37 by rene             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,32 @@ void	print__single_stack(t_dl_node	*one_stack);
 void	print_stacks(t_dl_node	**stack)
 {
 
-	printf("****** A ******\n");
-	printf("n        goal\n");
-	printf("=====    =====\n");
-	print__single_stack(stack[A]);
-	printf("*** STACK B ***\n");
-	print__single_stack(stack[B]);
+	printf("************** A ************* A *************\n");
+	print_single_stack(stack[A]);
+	printf("************** B ************* B *************\n");
+	print_single_stack(stack[B]);
 	printf("--------------------------------------------------------------");
 }
 
-void	print__single_stack(t_dl_node	*one_stack)
+void	print_single_stack(t_dl_node	*one_stack)
 {
 	t_dl_node	*node;
 	t_ps_obj	*obj;
 
+	printf("n        goal    green   size    rank    start   end \n");
+	printf("=====    =====   =====   =====   =====   =====   =====\n");
 	node = one_stack;
 	while (node != NULL)
 	{
 		obj = ((t_ps_obj*)node->obj);
-		printf("%d \t %d\n", obj->n, obj->goal);
+		printf("%d \t %d \t %d \t %d \t %d \t %d \t %d \n", 
+			obj->n, 
+			obj->goal, 
+			obj->is_green,
+			obj->group.size,
+			obj->group.rank,
+			obj->group.starts,
+			obj->group.ends);
 		node = node->next;
 	}
 	printf("\n");
