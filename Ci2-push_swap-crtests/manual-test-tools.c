@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manual-test-tools.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rene <rene@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: reciak <reciak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:11:56 by reciak            #+#    #+#             */
-/*   Updated: 2025/07/29 20:10:37 by rene             ###   ########.fr       */
+/*   Updated: 2025/08/04 19:57:26 by reciak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_stacks(t_dl_node	**stack)
 	print_single_stack(stack[A]);
 	printf("************** B ************* B *************\n");
 	print_single_stack(stack[B]);
-	printf("--------------------------------------------------------------");
+	printf("--------------------------------------------------------------\n");
 }
 
 void	print_single_stack(t_dl_node	*one_stack)
